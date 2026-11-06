@@ -1,0 +1,73 @@
+services:
+  eureka-server:
+    build: ./eureka-server
+    ports: ["8761:8761"]
+    environment:
+      EUREKA_URL: http://eureka-server:8761/eureka/
+    networks: [parkgrid]
+
+  auth-service:
+    build: ./auth-service
+    environment:
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server]
+    networks: [parkgrid]
+
+  parking-service:
+    build: ./parking-service
+    environment:
+      SERVER_PORT: 8082
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server]
+    networks: [parkgrid]
+
+  billing-service-1:
+    build: ./billing-service
+    environment:
+      SERVER_PORT: 8084
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server]
+    networks: [parkgrid]
+
+  billing-service-2:
+    build: ./billing-service
+    environment:
+      SERVER_PORT: 8084
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server]
+    networks: [parkgrid]
+
+  booking-service-1:
+    build: ./booking-service
+    environment:
+      SERVER_PORT: 8083
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server]
+    networks: [parkgrid]
+
+  booking-service-2:
+    build: ./booking-service
+    environment:
+      SERVER_PORT: 8083
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server]
+    networks: [parkgrid]
+
+  api-gateway:
+    build: ./api-gateway
+    ports: ["8080:8080"]
+    environment:
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      JWT_SECRET: ParkGrid-Demo-Secret-Key-Change-Me-2026-Long
+    depends_on: [eureka-server, auth-service, parking-service, billing-service-1, billing-service-2, booking-service-1, booking-service-2]
+    networks: [parkgrid]
+
+networks:
+  parkgrid:
+    driver: bridge

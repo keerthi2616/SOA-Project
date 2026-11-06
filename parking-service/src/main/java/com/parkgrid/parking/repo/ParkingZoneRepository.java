@@ -1,0 +1,1 @@
+package com.parkgrid.parking.repo; import com.parkgrid.parking.entity.ParkingZone; import org.springframework.data.jpa.repository.JpaRepository; public interface ParkingZoneRepository extends JpaRepository<ParkingZone,Long>{}

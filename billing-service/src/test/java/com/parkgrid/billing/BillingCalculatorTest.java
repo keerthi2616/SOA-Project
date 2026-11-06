@@ -1,0 +1,3 @@
+package com.parkgrid.billing;
+import com.parkgrid.billing.repo.BillingTransactionRepository; import com.parkgrid.billing.service.BillingCalculator; import com.parkgrid.billing.dto.*; import org.junit.jupiter.api.Test; import java.time.LocalDateTime; import static org.mockito.Mockito.*; import static org.junit.jupiter.api.Assertions.*;
+class BillingCalculatorTest { @Test void calculatesCeilingHours(){BillingTransactionRepository r=mock(BillingTransactionRepository.class); BillingCalculator c=new BillingCalculator(r); var s=LocalDateTime.of(2026,9,20,10,0); var e=s.plusMinutes(61); var out=c.calculate(new BillingRequest(s,e,null),"user1"); assertEquals(2,out.billableHours()); assertEquals(80.0,out.amount());} }

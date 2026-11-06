@@ -1,0 +1,1 @@
+package com.parkgrid.booking.repo; import com.parkgrid.booking.entity.Booking; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface BookingRepository extends JpaRepository<Booking,Long>{List<Booking> findByUsernameOrderByStartTimeDesc(String username);}

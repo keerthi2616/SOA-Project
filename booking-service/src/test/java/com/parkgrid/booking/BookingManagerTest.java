@@ -1,0 +1,3 @@
+package com.parkgrid.booking;
+import com.parkgrid.booking.client.*; import com.parkgrid.booking.dto.*; import com.parkgrid.booking.repo.BookingRepository; import com.parkgrid.booking.service.BookingManager; import org.junit.jupiter.api.Test; import java.time.LocalDateTime; import static org.mockito.Mockito.*; import static org.junit.jupiter.api.Assertions.*;
+class BookingManagerTest { @Test void rejectsInvalidTime(){BookingRepository r=mock(BookingRepository.class); ParkingClient p=mock(ParkingClient.class); BillingClient b=mock(BillingClient.class); var m=new BookingManager(r,p,b); var s=LocalDateTime.now(); assertThrows(IllegalArgumentException.class,()->m.create(new BookingRequest(1L,s,s),"u","t")); verifyNoInteractions(p,b);}}

@@ -1,0 +1,29 @@
+PARKGRID SOLUTIONS — START HERE
+
+1. Extract the ZIP.
+2. Install JDK 21 and Maven.
+3. Open the extracted folder in VS Code.
+4. In the VS Code terminal, run:
+   mvn clean install
+5. Start Eureka first:
+   cd eureka-server
+   mvn spring-boot:run
+6. Open another terminal and start Auth:
+   cd auth-service
+   mvn spring-boot:run
+7. Start Parking, Billing, Booking and Gateway in separate terminals.
+8. Use http://localhost:8080 for all client API calls.
+9. Open http://localhost:8761 to show Eureka registrations.
+10. Follow docs/04-api-testing.md for Postman.
+
+DOCKER OPTION
+
+After `mvn clean install`, from the root run:
+   docker compose up --build
+
+Then use:
+   Gateway: http://localhost:8080
+   Eureka:  http://localhost:8761
+
+IMPORTANT
+The project uses a demo JWT secret and demo passwords. Change them for real deployment.

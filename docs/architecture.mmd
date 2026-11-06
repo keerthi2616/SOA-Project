@@ -1,0 +1,21 @@
+flowchart LR
+    C[Driver / Admin] --> G[API Gateway :8080]
+    G --> A[Auth Service :8081]
+    G --> P[Parking Service :8082]
+    G --> B1[Booking Service #1 :8083]
+    G --> B2[Booking Service #2 :8086]
+    G --> BL1[Billing Service #1 :8084]
+    G --> BL2[Billing Service #2 :8087]
+    B1 -->|Reserve / Release| P
+    B2 -->|Reserve / Release| P
+    B1 -->|Calculate Fee| BL1
+    B1 -->|Calculate Fee| BL2
+    B2 -->|Calculate Fee| BL1
+    B2 -->|Calculate Fee| BL2
+    E[Eureka Server :8761] -. discovery .-> G
+    E -. discovery .-> A
+    E -. discovery .-> P
+    E -. discovery .-> B1
+    E -. discovery .-> B2
+    E -. discovery .-> BL1
+    E -. discovery .-> BL2

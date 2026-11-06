@@ -1,0 +1,1 @@
+package com.parkgrid.billing.repo; import com.parkgrid.billing.entity.BillingTransaction; import org.springframework.data.jpa.repository.JpaRepository; public interface BillingTransactionRepository extends JpaRepository<BillingTransaction,Long>{}
